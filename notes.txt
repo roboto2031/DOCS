@@ -1,0 +1,24 @@
+
+===| tor |===\
+---| tor rotate |---
+PID=`pidof tor`;
+kill -1 $PID
+---| proxychains |---
+edit /etc/proxychains
+socks5 127.0.0.1 9050 ### tor
+
+proxychains {command/app}
+
+<<<| tor rotate - python |>>>
+get pid;
+send sighup to pid;
+
+===| tcpdump |===
+tcpdump -vX -s0 -i inf 'tcp port ### host {domain}'
+
+===| ngrep |===
+
+
+for domain check add rotate function call in try block (timeout or google not exist) and after # of checks.
+
+
