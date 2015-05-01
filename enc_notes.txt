@@ -1,0 +1,13 @@
+
+===| encrypted VM disk |===
+create multpart disk with for loop and dd
+loopback device; losetup /dev/loop$i part$i
+
+lvm file parts into single logical disk
+pvcreate /dev/loop$i;
+vgcreate VOLGRP /dev/loop$i;
+lvcreate -l 100%FREE -n LOGVOL VOLGRP;
+ 
+encrypt logical disk
+cryptsetup -c serpent-xts-plain63 --hash sha512 --key-size 512 luksFormat /dev/VOLGRP/LOGVOL
+
