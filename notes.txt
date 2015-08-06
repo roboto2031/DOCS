@@ -31,3 +31,6 @@ cat <file> | uniq | xxd -r -p | zcat
 
 ---| Simple DNS listener |---
 netcat -x <file.hex> -u -l 53
+
+===| bash tcp port check |===
+echo > /dev/tcp/{ip}/{port}
