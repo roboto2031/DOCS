@@ -1,0 +1,16 @@
+mount rpi image
+resize?
+install cryptsetup
+update initramfs and cmdline.txt
+umount image
+backup root part
+delete root part
+create new root part
+create luks enc part
+open enc part
+create fs
+mount root fs
+restore backuped root files
+umount root fs
+close enc part
+
