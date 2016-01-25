@@ -17,6 +17,6 @@ close enc part
 
 ====ARCH Linux encrypted RPi====
 create boot part
-create encrypte root part
+create encrypted root part
 extract Arch ARM files to parts
 update initiramfs and cmdline.txt
