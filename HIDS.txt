@@ -1,0 +1,9 @@
+{===AIDE===}
+[--UBUNTU--]
+apt-get install aide;
+
+{===TRIPWIRE===}
+[--UBUNTU--]
+apt-get install tripwire;
+# specify site and local passphrase or build by hand
+# write protect /usr/sbin and /var/lib/tripwire
