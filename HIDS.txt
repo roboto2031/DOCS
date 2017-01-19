@@ -1,9 +1,42 @@
 {===AIDE===}
 [--UBUNTU--]
 apt-get install aide;
+# aide config - /etc/default/aide
+# aide rules - /etc/aide/aide.conf
+aide --init or aideinit
+# add dir and rule to aide.conf
+aide.wrapper --check or --update
+
+[--CentOS--]
+yum install aide;
+# aide rules - /etc/aide.conf
+aide --init
+aide --check or --update
 
 {===TRIPWIRE===}
 [--UBUNTU--]
 apt-get install tripwire;
 # specify site and local passphrase or build by hand
 # write protect /usr/sbin and /var/lib/tripwire
+#tripwire policy config - /etc/tripwrire/twpol.txt
+# object  -> property (attr = val)
+twadmin
+tripwire --check
+# check /dev/pts
+twadmin -m P /etc/tripwire/twpol.txt
+twadmin --print-polfile > /etc/tripwire/twpol.txt
+tripwire --check | mail -s "Tripwire report for `uname -n`" your_email@domain.com
+
+[--CentOS--]
+#install from epel
+yum install tripwire;
+tripwire-setup-keyfiles;
+# tripwire config - /etc/tripwire/twcfg.txt
+# tripwire rules - /etc/tripwire/twpol.txt
+twadmin -m F -c tw.cfg -S site.key twcfg.txt 
+twadmin -m P -c tw.cfg -p tw.pol -S site.key twpol.txt.new 
+tripwire --init
+tripwire --check
+
+
+
