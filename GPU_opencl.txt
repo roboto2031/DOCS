@@ -1,0 +1,13 @@
+[CentOS]
+install epel repo, https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+install fglrx or amdgpu, depends on oldest GPU, xorg-x11-server-Xorg
+install AMD-APP SDK
+
+{pass cracking}
+install expat-devel, openssl-devel
+hashcat, git https://github.com/hashcat/hashcat.git, git submodule update --init, make
+john, make
+john-jumbo, configure, make 
+ophcrack, configure --disable-gui
+
+yum install xorg-x11-server-Xorg openssl-devel expat-devel lm_sensors libnl-devel
