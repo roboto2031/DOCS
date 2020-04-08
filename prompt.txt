@@ -1,0 +1,1 @@
+PS1=[\[$(tput setaf 9)\]\D{%Y-%m-%d|%H:%M:%S|%Z} `hostname -i`|\n|\[$(tput sgr0)\]\u@\H \W]\$
